@@ -1,13 +1,13 @@
 # eth-contract-fdns
 Ethereum implementation of GNS — addressation and identification service.
 
-###Requirements
+### Requirements
 `truffle`
 `ganache`
 
-###Installation
+### Installation
 `npm i`
 
-###Deploy
+### Deploy
 `truffle compile`
 `truffle migrate --network ganache`
