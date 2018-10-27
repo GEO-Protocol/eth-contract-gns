@@ -1,11 +1,11 @@
 {
-  "name": "geo_eth_state_channels",
+  "name": "geo_gns",
   "version": "0.1.0",
   "private": true,
-  "description": "Ethereum smart contracts for eth state channels in GEO protocol",
+  "description": "Ethereum smart contracts for GEO gns register",
   "scripts": {
-    "compile": "npm truffle compile",
-    "test": "npm test"
+    "compile": "truffle compile",
+    "test": "truffle test"
   },
   "author": "Korobeinikov Aleksei <koroqe@gmail.com>",
   "license": "MIT",

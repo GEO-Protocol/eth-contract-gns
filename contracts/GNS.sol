@@ -2,7 +2,7 @@ import "./GNSlib.sol";
 
 pragma solidity ^0.4.24;
 
-contract GNS is GNSlib{
+contract GNS is GNSlib {
 
     /*  STORAGE
     */
@@ -44,7 +44,7 @@ contract GNS is GNSlib{
 
     /** @notice Returns owner of record name
     */
-    function getOwnerForName(string _name) view public returns (address) {
+    function getOwnerOfName(string _name) view public returns (address) {
         return _ownerOfName[_name];
     }
 
@@ -54,8 +54,9 @@ contract GNS is GNSlib{
         string _name,
         bytes _rawRecord)
     onlyOwnerOfName(_name)
-    public {
-//        require(isValidRecord(_rawRecord)); // fixme disabled validity check
+    public
+    {
+        //        require(isValidRecord(_rawRecord)); // fixme disabled validity check
         uint128 recordIndex = _existRawRecordsByContent[_rawRecord];
         uint8 typeOfRecord = uint8(_rawRecord[0]);
         if (recordIndex > 0) {
@@ -64,8 +65,7 @@ contract GNS is GNSlib{
             for (uint128 i = 0; i < recByType.length; i++)
                 if (keccak256(_records[recByType[i]]) == hash)
                     revert();
-        }
-        if (recordIndex == 0) {
+        } else {
             recordIndex = uint128(_records.push(_rawRecord) - 1);
             _existRawRecordsByContent[_rawRecord] = recordIndex;
         }
@@ -87,13 +87,13 @@ contract GNS is GNSlib{
         uint128 _recordId)
     onlyExistName(_name)
     onlyOwnerOfName(_name)
-    public {
+    public
+    {
         removeFirstElementInArrayByValue(_recordIdsForName[_name], _recordId);
         uint8 typeOfRecord = uint8(_records[_recordId][0]);
         removeFirstElementInArrayByValue(_recordIdsForNameByType[_name][typeOfRecord], _recordId);
         if (_recordIdsForName[_name].length == 0) {
             _ownerOfName[_name] = 0;
-            //give freedom to a name?!
             _nameOfOwner[msg.sender] = "";
         }
     }
@@ -105,7 +105,8 @@ contract GNS is GNSlib{
         bytes _rawRecord)
     onlyExistName(_name)
     onlyOwnerOfName(_name)
-    public {
+    public
+    {
         uint128 recordIndex = _existRawRecordsByContent[_rawRecord];
         if (recordIndex == 0)
             revert();
@@ -114,42 +115,61 @@ contract GNS is GNSlib{
 
     /** @notice Returns record based on ID
     */
-    function getRawRecordById(uint128 _recordId) view public returns (bytes){
+    function getRawRecordById(
+        uint128 _recordId
+    )
+    view
+    public
+    returns (bytes)
+    {
         require(_recordId >= 0 && _recordId < _records.length);
         return _records[_recordId];
     }
 
     /** @notice Returns record array
     */
-    function getRecordsList(string _name)
+    function getRecordsList(
+        string _name)
     view
     public
     onlyExistName(_name)
-    returns (uint128[]){
+    returns (uint128[])
+    {
         return _recordIdsForName[_name];
     }
 
     /** @notice Returns record array by type
     */
-    function getRecordsList(string _name,
+    function getRecordsList(
+        string _name,
         uint8 _typeOfRecord)
     view
     public
     onlyExistName(_name)
-    returns (uint128[]){
+    returns (uint128[])
+    {
         return _recordIdsForNameByType[_name][_typeOfRecord];
     }
 
     /** @notice Checks whether name in register exists
     */
-    function isNameExist(string _name) view public returns (bool){
+    function isNameExist(
+        string _name)
+    view
+    public
+    returns (bool)
+    {
         return _ownerOfName[_name] != 0;
     }
 
     /*  PRIVATE
     */
 
-    function removeFirstElementInArrayByValue(uint128[] storage _where, uint128 _what) private {
+    function removeFirstElementInArrayByValue(
+        uint128[] storage _where,
+        uint128 _what)
+    private
+    {
         for (uint128 i = 0; i < _where.length; i++) {
             if (_where[i] == _what) {
                 if (i + 1 < _where.length)

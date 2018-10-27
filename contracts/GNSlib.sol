@@ -6,13 +6,14 @@ contract GNSlib {
 
     }
 
-    function stringToHexHelper(string what) pure public returns (bytes) {
-        return bytes(what);
-    }
-
     /** @notice Verifies name validness. Name should not contain dots (".")
     */
-    function isValidName(string _name) pure public returns (bool) {
+    function isValidName(
+        string _name)
+    pure
+    public
+    returns (bool)
+    {
         bytes memory nameInByteArray = bytes(_name);
         for (uint128 i = 0; i < nameInByteArray.length; i++)
             if (nameInByteArray[i] == '.')
@@ -22,7 +23,14 @@ contract GNSlib {
 
     /** @notice Verifies validness of part of record
     */
-    function isValidString(bytes _str, uint32 _offset, uint32 _length) pure public returns (bool) {
+    function isValidString(
+        bytes _str,
+        uint32 _offset,
+        uint32 _length)
+    pure
+    public
+    returns (bool)
+    {
         if (_str.length < _offset + _length)
             return false;
         for (uint128 i = _offset; i < _length; i++)
@@ -33,7 +41,13 @@ contract GNSlib {
 
     /** @notice Verifies is record name exists
     */
-    function bytesToUint32LE(bytes _what, uint32 _offset) pure public returns (uint32) {
+    function bytesToUint32LE(
+        bytes _what,
+        uint32 _offset)
+    pure
+    public
+    returns (uint32)
+    {
         require(_what.length >= _offset + 4);
         return uint32(_what[_offset + 3])
         | (uint32(_what[_offset + 2]) << 8)
@@ -44,7 +58,12 @@ contract GNSlib {
     /**
      * If type of protocol not in range for custom or not unknown type, the function returns false
      */
-    function isValidRecord(bytes _rawRecord) pure public returns (bool) {
+    function isValidRecord(
+        bytes _rawRecord)
+    pure
+    public
+    returns (bool)
+    {
         if (_rawRecord.length <= 1)
             return false;
         uint8 typeOfRecord = uint8(_rawRecord[0]);
@@ -61,7 +80,12 @@ contract GNSlib {
         return false;
     }
 
-    function isValidFDNSRecord(bytes _rawRecord) pure public returns (bool) {
+    function isValidFDNSRecord(
+        bytes _rawRecord)
+    pure
+    public
+    returns (bool)
+    {
         uint8 typeOfRecord = uint8(_rawRecord[0]);
         if (typeOfRecord != 0)
             return false;
@@ -72,7 +96,12 @@ contract GNSlib {
         return true;
     }
 
-    function isValidIPv4Record(bytes _rawRecord) pure public returns (bool) {
+    function isValidIPv4Record(
+        bytes _rawRecord)
+    pure
+    public
+    returns (bool)
+    {
         uint8 typeOfRecord = uint8(_rawRecord[0]);
         if (typeOfRecord != 1)
             return false;
@@ -81,7 +110,12 @@ contract GNSlib {
         return true;
     }
 
-    function isValidIPv6Record(bytes _rawRecord) pure public returns (bool) {
+    function isValidIPv6Record(
+        bytes _rawRecord)
+    pure
+    public
+    returns (bool)
+    {
         uint8 typeOfRecord = uint8(_rawRecord[0]);
         if (typeOfRecord != 2)
             return false;
@@ -90,7 +124,12 @@ contract GNSlib {
         return true;
     }
 
-    function isValidDNSRecord(bytes _rawRecord) pure public returns (bool) {
+    function isValidDNSRecord(
+        bytes _rawRecord)
+    pure
+    public
+    returns (bool)
+    {
         uint8 typeOfRecord = uint8(_rawRecord[0]);
         if (typeOfRecord != 3)
             return false;
