@@ -1,5 +1,4 @@
 var GNS = artifacts.require("GNS");
-const lodash = require("lodash");
 
 contract('GNS', function() {
 
@@ -51,15 +50,11 @@ contract('GNS', function() {
         await gns.createRecord("name",['0x03','0x31','0x32','0x33']);
         await gns.createRecord("name",['0x03','0x31','0x33','0x33']);
 
-        assert.equal(lodash.size(await gns.getRecordsList("name")), 8, "getRecordsList wrong result");
-        // assert.equal(lodash.size(await gns.getRecordsListByType("name",'0x00')), 3, "getRecordsListByType wrong result");
+        assert.equal(await gns.getRecordsCount("name"), 8, "getRecordsCount wrong result");
 
-
-        await gns.removeRecordById("name",1);
-        assert.equal(lodash.size(await gns.getRecordsList("name")), 7, "removeRecordById not work");
-
-        await gns.removeRecordByValue("name",['0x00','0x00','0x00','0x00','0x03','0x71','0x42','0x33']);
-        assert.equal(lodash.size(await gns.getRecordsList("name")), 6, "removeRecordByValue not work");
+        const rawRecordAt = await gns.getRawRecordAt("name",1);
+        await gns.removeRecord("name",rawRecordAt);
+        assert.equal(await gns.getRecordsCount("name"), 7, "removeRecord not work");
 
         await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x37','0x32','0x33']);
         let passed = true;
