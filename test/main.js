@@ -53,6 +53,13 @@ contract('GNS', function() {
 
         assert.equal(lodash.size(await gns.getRecordsList("name")), 8, "getRecordsList wrong result");
         // assert.equal(lodash.size(await gns.getRecordsListByType("name",'0x00')), 3, "getRecordsListByType wrong result");
+
+
+        await gns.removeRecordById("name",1);
+        assert.equal(lodash.size(await gns.getRecordsList("name")), 7, "removeRecordById not work");
+
+        await gns.removeRecordByValue("name",['0x00','0x00','0x00','0x00','0x03','0x71','0x42','0x33']);
+        assert.equal(lodash.size(await gns.getRecordsList("name")), 6, "removeRecordByValue not work");
     });
 
     it("access test", async () => {
