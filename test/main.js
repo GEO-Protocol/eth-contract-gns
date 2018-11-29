@@ -65,4 +65,14 @@ contract('GNS', function(accounts) {
         }
     });
 
+    it("name in register", async () => {
+        const gns = await GNS.deployed();
+
+        assert.equal(await gns.isNameExist("name in register"), false, "isNameExist wrong result");
+
+        await gns.createRecord("name in register",['0x00','0x00','0x00','0x00','0x03','0x31','0x32','0x33']);
+
+        assert.equal(await gns.isNameExist("name in register"), true, "isNameExist wrong result");
+    });
+
 });
