@@ -60,6 +60,16 @@ contract('GNS', function() {
 
         await gns.removeRecordByValue("name",['0x00','0x00','0x00','0x00','0x03','0x71','0x42','0x33']);
         assert.equal(lodash.size(await gns.getRecordsList("name")), 6, "removeRecordByValue not work");
+
+        await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x37','0x32','0x33']);
+        let passed = true;
+        try {
+            await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x37','0x32','0x33']);
+            passed=false;
+        }catch (_) {}
+        if(!passed){
+            throw "createRecord can create record retry";
+        }
     });
 
     it("access test", async () => {
