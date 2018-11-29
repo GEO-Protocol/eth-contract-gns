@@ -140,7 +140,7 @@ contract GNS is GNSlib {
 
     /** @notice Returns record array by type
     */
-    function getRecordsList(
+    function getRecordsListByType(
         string _name,
         uint8 _typeOfRecord)
     view

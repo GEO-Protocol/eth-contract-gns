@@ -2,4 +2,8 @@
 .idea
 .iml
 .xml
+
 node_modules
+
+build/
+build/contracts
