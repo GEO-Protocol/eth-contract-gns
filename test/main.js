@@ -2,9 +2,7 @@ var GNS = artifacts.require("GNS");
 
 contract('GNS', function(accounts) {
 
-    console.log("accounts",accounts);
-
-    it("create, find, remove records", async () => {
+    it("create, get, remove records", async () => {
         const gns = await GNS.deployed();
 
         console.log("address",gns.address);
