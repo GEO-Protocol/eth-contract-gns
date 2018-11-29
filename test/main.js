@@ -68,7 +68,7 @@ contract('GNS', function() {
             passed=false;
         }catch (_) {}
         if(!passed){
-            throw "createRecord can create record retry";
+            throw "createRecord can create record not unique";
         }
     });
 
