@@ -1,4 +1,5 @@
 var GNS = artifacts.require("GNS");
+const lodash = require("lodash");
 
 contract('GNS', function() {
 
@@ -38,6 +39,8 @@ contract('GNS', function() {
     it("create, find, remove records", async () => {
         const gns = await GNS.deployed();
 
+        console.log("address",gns.address);
+
         await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x31','0x32','0x33']);
         await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x31','0x2e','0x33']);
         await gns.createRecord("name",['0x00','0x00','0x00','0x00','0x03','0x71','0x42','0x33']);
@@ -47,6 +50,9 @@ contract('GNS', function() {
         await gns.createRecord("name",['0x02','0xff','0xbb','0xff','0xaa','0xff','0xbb','0xff','0xaa','0xff','0xbb','0xff','0xaa','0xff','0xbb','0xff','0xaa']);
         await gns.createRecord("name",['0x03','0x31','0x32','0x33']);
         await gns.createRecord("name",['0x03','0x31','0x33','0x33']);
+
+        assert.equal(lodash.size(await gns.getRecordsList("name")), 8, "getRecordsList wrong result");
+        // assert.equal(lodash.size(await gns.getRecordsListByType("name",'0x00')), 3, "getRecordsListByType wrong result");
     });
 
     it("access test", async () => {
