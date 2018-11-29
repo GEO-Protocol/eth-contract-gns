@@ -59,14 +59,10 @@ contract('GNS', function(accounts) {
         }
 
         {
-            let passed = true;
             try {
-                const rawRecordAt = await gns.getRawRecordAt("name",{from:accounts[1]});
-                await gns.removeRecord("name",rawRecordAt);
-                passed=false;
-            }catch (_) {}
-            if(!passed){
-                throw "createRecord not owner have access";
+                await gns.getRawRecordAt("name", 1,{from:accounts[1]});
+            }catch (_) {
+                throw "getRawRecordAt not owner not have access";
             }
         }
     });
