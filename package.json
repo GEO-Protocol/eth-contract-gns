@@ -1,0 +1,24 @@
+{
+  "name": "geo_gns",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Ethereum smart contracts for GEO gns register",
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test"
+  },
+  "author": "Korobeinikov Aleksei <koroqe@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "truffle": "^4.1.8"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "lodash": "^4.17.11",
+    "web3": "^1.0.0-beta.34"
+  }
+}
