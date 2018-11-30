@@ -11,3 +11,6 @@ Ethereum implementation of GNS — addressation and identification service.
 ### Deploy
 `truffle compile`
 `truffle migrate --network ganache`
+
+### Test
+`truffle test --network ganache`
